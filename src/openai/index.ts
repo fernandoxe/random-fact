@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from 'openai';
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from 'openai';
 import { apiKey } from '../config';
 
 const configuration = new Configuration({
@@ -7,15 +7,10 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-export const getRandomFact = async (prompt: string) => {
+export const getRandomFact = async (messages: ChatCompletionRequestMessage[]) => {
   const { data } = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'user',
-        content: prompt,
-      }
-    ],
+    messages,
     // temperature: 0,
     top_p: 1,
     max_tokens: 150,
