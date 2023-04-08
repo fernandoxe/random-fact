@@ -11,9 +11,9 @@ export const getRandomFact = async (messages: ChatCompletionRequestMessage[]) =>
   const { data } = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages,
-    // temperature: 0,
+    temperature: 1,
     top_p: 1,
-    max_tokens: 150,
+    max_tokens: 75,
   });
   
   return data.choices[0].message?.content;
